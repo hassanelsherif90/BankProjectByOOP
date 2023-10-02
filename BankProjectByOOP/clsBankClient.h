@@ -11,7 +11,7 @@ class clsBankClient : public clsPerson
 {
 private:
 
-	enum enMode{EmptyMode = 0, UpdateMode = 1};
+	enum enMode{EmptyMode = 0, UpdateMode = 1, AddNewMode = 2};
 
 	enMode _Mode;
 	string _AccountNumber;
@@ -111,6 +111,26 @@ private:
 
 	}
 
+	void _AddNew()
+	{
+		_AddDataToFile(_ConvertClientObjectToLine(*this));
+	}
+
+	void _AddDataToFile(string Client)
+	{
+		fstream MyFile;
+		MyFile.open("Clients.txt", ios::app);
+
+		if (MyFile.is_open())
+		{
+			
+			MyFile << Client << endl;
+		
+			MyFile.close();
+		}
+
+	}
+
 	static clsBankClient _GetEmptyClientObject()
 	{
 		return clsBankClient(enMode::EmptyMode, "", "", "", "", "", "", 0);
@@ -164,8 +184,7 @@ public:
 
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-	void Print()
-	{
+	void Print(){
 		cout << "\nClient Card:";
 		cout << "\n__________________________";
 		cout << "\nFirstName    : " << FirstName;
@@ -241,6 +260,11 @@ public:
 		return _GetEmptyClientObject();
 	}
 
+	static clsBankClient GetAddNewClientObject(string AccountNumber)
+	{
+		return clsBankClient(enMode::AddNewMode, "", "", "", "", AccountNumber, "", 0);
+	}
+
 	static bool IsClientExist(string AccountNumber)
 	{
 		clsBankClient Client1 = clsBankClient::Find(AccountNumber);
@@ -248,7 +272,7 @@ public:
 		return (!Client1.IsEmpty());
 	}
 
-	enum enSaveResults {svFaildEmptyObject = 0, svSucceded = 1};
+	enum enSaveResults {svFaildEmptyObject = 0, svSucceded = 1, svFaildAccountNumberExsit = 2};
 
 	enSaveResults Save()
 	{
@@ -256,8 +280,11 @@ public:
 		{
 		case enMode::EmptyMode :
 			{
-				return enSaveResults::svFaildEmptyObject;
-				break;
+				if (IsEmpty())
+					{
+						return enSaveResults::svFaildEmptyObject;
+					}
+		
 			}
 
 		case enMode::UpdateMode:
@@ -266,7 +293,24 @@ public:
 				return enSaveResults::svSucceded;
 				break;
 			}
+		case enMode::AddNewMode:
+			{
+
+				if (clsBankClient::IsClientExist(_AccountNumber))
+					{
+						return enSaveResults::svFaildAccountNumberExsit;
+					}
+				else
+					{
+						_AddNew();
+						_Mode = enMode::UpdateMode;
+						return enSaveResults::svSucceded;;
+						break;
+					}
+
+			}	
 		}
+
 	}
 
 };

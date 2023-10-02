@@ -30,6 +30,86 @@ private:
 
 	}
 
+	static string _ConvertClientObjectToLine( clsBankClient Client, string Separator = "#//#")
+	{
+
+		string DataLine = "";
+
+		DataLine = Client.FirstName + Separator;
+		DataLine += Client.LastName + Separator;
+		DataLine += Client.Email + Separator;
+		DataLine += Client.Phone + Separator;
+		DataLine += Client.AccountNumber() + Separator;
+		DataLine += Client.PinCode + Separator;
+		DataLine += to_string(Client.AccountBalance);
+
+		return DataLine;
+
+	}
+
+	static void _SaveClientDataToFile(vector <clsBankClient> _vClients)
+	{
+		fstream MyFile;
+		MyFile.open("Clients.txt", ios::out);
+
+		if (MyFile.is_open())
+		{
+			string DateLine;
+			for (clsBankClient C : _vClients)
+			{
+				DateLine = _ConvertClientObjectToLine(C);
+
+				MyFile << DateLine << endl;
+			}
+
+			MyFile.close();
+		}
+
+	}
+
+	static vector <clsBankClient> _LoadClientsDateFromFile()
+	{
+
+		vector <clsBankClient> vClient;
+
+		fstream MyFile;
+		MyFile.open("Clients.txt", ios::in);
+
+		if (MyFile.is_open())
+		{
+			string Line;
+
+			while (getline(MyFile, Line))
+			{
+				clsBankClient Client = _ConvertLineToClientObject(Line);
+				vClient.push_back(Client);
+			}
+
+			MyFile.close();
+		}
+
+		return vClient;
+
+	}
+
+	void _Update()
+	{
+
+		vector <clsBankClient> _vClients;
+		_vClients = _LoadClientsDateFromFile();
+
+		for (clsBankClient& C : _vClients)
+		{
+			if (C.AccountNumber() == AccountNumber())
+			{
+				C = *this;
+				break;
+			}
+		}
+
+		_SaveClientDataToFile(_vClients);
+
+	}
 
 	static clsBankClient _GetEmptyClientObject()
 	{
@@ -132,7 +212,6 @@ public:
 
 	}
 
-
 	static clsBankClient Find(string AccountNumber, string PinCode)
 	{
 		vector <clsBankClient> vClients;
@@ -167,6 +246,27 @@ public:
 		clsBankClient Client1 = clsBankClient::Find(AccountNumber);
 
 		return (!Client1.IsEmpty());
+	}
+
+	enum enSaveResults {svFaildEmptyObject = 0, svSucceded = 1};
+
+	enSaveResults Save()
+	{
+		switch (_Mode)
+		{
+		case enMode::EmptyMode :
+			{
+				return enSaveResults::svFaildEmptyObject;
+				break;
+			}
+
+		case enMode::UpdateMode:
+			{
+				_Update();
+				return enSaveResults::svSucceded;
+				break;
+			}
+		}
 	}
 
 };

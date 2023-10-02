@@ -50,14 +50,7 @@ public:
 	static float ReadFloatNumber()
 	{
 		float Number;
-
-		while (!(cin >> Number))
-		{
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-		}
-
-		
+		cin >> Number;
 		return Number;
 	}
 

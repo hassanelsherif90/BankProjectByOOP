@@ -50,7 +50,25 @@ void UpdateClient()
     ReadClientInfo(Client1);
     cout << "_____________________";
 
+    clsBankClient::enSaveResults SaveResults;
 
+    SaveResults = Client1.Save();
+
+    switch (SaveResults)
+    {
+        case clsBankClient::enSaveResults::svSucceded:
+        {
+            cout << "\nAccount Updated Successfully :) \n";
+            Client1.Print();
+            break;
+        }
+        
+        case clsBankClient::enSaveResults::svFaildEmptyObject:
+        {
+            cout << "\nError Account was not saved bescouse it’s Empty :( \n";
+            break;
+        }
+    }
 }
 
 int main()

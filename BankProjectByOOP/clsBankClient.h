@@ -17,6 +17,7 @@ private:
 	string _AccountNumber;
 	string _PinCode;
 	float _AccountBalance;
+	bool _MarkForDelete = false;
 
 	static clsBankClient _ConvertLineToClientObject(string Line, string Separator = "#//#")
 	{
@@ -57,9 +58,11 @@ private:
 			string DateLine;
 			for (clsBankClient C : _vClients)
 			{
-				DateLine = _ConvertClientObjectToLine(C);
-
-				MyFile << DateLine << endl;
+				if (C.MarkForDelete() == false)
+				{
+					DateLine = _ConvertClientObjectToLine(C);
+					MyFile << DateLine << endl;
+				}
 			}
 
 			MyFile.close();
@@ -183,6 +186,11 @@ public:
 	}
 
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
+
+	bool MarkForDelete()
+	{
+		return _MarkForDelete;
+	}
 
 	void Print(){
 		cout << "\nClient Card:";
@@ -311,6 +319,27 @@ public:
 			}	
 		}
 
+	}
+
+	bool Delete()
+	{
+		vector <clsBankClient> _vClients;
+		_vClients = _LoadClientsDateFromFile();
+
+		for (clsBankClient& C : _vClients)
+		{
+			if (C.AccountNumber() == _AccountNumber)
+			{
+				C._MarkForDelete = true;
+				break;
+			}
+		}
+
+		_SaveClientDataToFile(_vClients);
+
+		*this = _GetEmptyClientObject();
+
+		return true;
 	}
 
 };

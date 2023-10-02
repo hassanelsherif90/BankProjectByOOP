@@ -73,18 +73,18 @@ void UpdateClient()
 
 void AddNewClient()
 {
-    string Account_Number;
+    string AccountNumber;
 
     cout << "\nPlease Enter client Account Number : ";
-    Account_Number = clsInputValidate::ReadString();
+    AccountNumber = clsInputValidate::ReadString();
 
-    while (clsBankClient::IsClientExist(Account_Number))
+    while (clsBankClient::IsClientExist(AccountNumber))
     {
         cout << "\nAccount number is alraedy Used, choose another one: ";
-        Account_Number = clsInputValidate::ReadString();
+        AccountNumber = clsInputValidate::ReadString();
     }
 
-    clsBankClient NewClient = clsBankClient::GetAddNewClientObject(Account_Number);
+    clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
  
     cout << "\n\nAdd Client :\n";
     cout << "_____________________";
@@ -120,14 +120,53 @@ void AddNewClient()
     cout << endl;
 }
 
+void DeleteClient()
+{
+    string AccountNumber;
+
+    cout << "\nPlease Enter client Account Number : ";
+    AccountNumber = clsInputValidate::ReadString();
+
+    while (!clsBankClient::IsClientExist(AccountNumber))
+    {
+        cout << "\nAccount number is not found, choose another one: ";
+        AccountNumber = clsInputValidate::ReadString();
+    }
+
+    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
+    Client1.Print();
+
+    cout << "\nAre you Want to delete Account Number ? y / n ? ";
+
+    char Answer = 'N';
+    cin >> Answer;
+
+    if (Answer == 'y' || Answer == 'Y')
+    {
+        if (Client1.Delete())
+        {
+            cout << "\nClient Deleted Successfully :) .";
+            Client1.Print();
+        }
+        else
+        {
+            cout << "\nError Client Was not Deleted .";
+    }
+    } else
+    {
+        cout << "\nClient Was not Deleted .";
+    }
+
+}
 
 
 int main()
 {
     //UpdateClient();
     //AddNewClient();
-    clsBankClient Client = clsBankClient::Find("A104000");
-    Client.Print();
+    /*clsBankClient Client = clsBankClient::Find("A104000");
+    Client.Print();*/
+    DeleteClient();
 
     system("pause>0");
 }

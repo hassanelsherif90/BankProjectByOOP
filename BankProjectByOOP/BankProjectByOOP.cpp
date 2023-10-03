@@ -1,6 +1,7 @@
 #include <iostream>
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
+#include  <iomanip>
 
 using namespace std;
 
@@ -159,15 +160,55 @@ void DeleteClient()
 
 }
 
+void PrintClientRecordLine(clsBankClient Client)
+{
+    cout << "| " << setw(15)  << left << Client.AccountNumber();
+    cout << "| " << setw(20)  << left << Client.FirstName + " " + Client.LastName;
+    cout << "| " << setw(12)  << left << Client.Phone;
+    cout << "| " << setw(20)  << left << Client.Email;
+    cout << "| " << setw(10)  << left << Client.PinCode;
+    cout << "| " << setw(12)  << left << Client.AccountBalance;
+}                              
+
+void ShowClientsList()
+{
+    vector <clsBankClient> vClients = clsBankClient::GetClientsList();
+    cout << "\n\t\t\t\tClient List (" << vClients.size() << ") Clients ";
+    cout << "\n___________________________________________";
+    cout << "____________________________________________________________\n" << endl;
+    cout << "| " << left << setw(15) << "Account Number";
+    cout << "| " << left << setw(20) << "Client Nmae";
+    cout << "| " << left << setw(12) << "Phone";
+    cout << "| " << left << setw(20) << "Email";
+    cout << "| " << left << setw(10) << "Pin Code";
+    cout << "| " << left << setw(12) << "Balance";
+    cout << "\n___________________________________________";
+    cout << "____________________________________________________________\n" << endl;
+
+    if (vClients.size() == 0)
+        cout << "\n\t\t\tNo Clients Avaiable In the System!";
+    else
+
+        for (clsBankClient C : vClients)
+        {
+            PrintClientRecordLine(C);
+            cout << endl;
+        }
+
+    cout << "\n___________________________________________";
+    cout << "____________________________________________________________\n" << endl;
+
+}
+
 
 int main()
 {
     //UpdateClient();
     //AddNewClient();
-    /*clsBankClient Client = clsBankClient::Find("A104000");
-    Client.Print();*/
-    DeleteClient();
-
+    /*clsBankClient Client = clsBankClient::Find("A101");
+    Client.Print()*/;
+    //DeleteClient();
+    ShowClientsList();
     system("pause>0");
 }
 

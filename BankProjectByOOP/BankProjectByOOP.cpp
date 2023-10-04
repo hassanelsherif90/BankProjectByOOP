@@ -163,7 +163,7 @@ void DeleteClient()
 void PrintClientRecordLine(clsBankClient Client)
 {
     cout << "| " << setw(15)  << left << Client.AccountNumber();
-    cout << "| " << setw(20)  << left << Client.FirstName + " " + Client.LastName;
+    cout << "| " << setw(20)  << left << Client.FullName();
     cout << "| " << setw(12)  << left << Client.Phone;
     cout << "| " << setw(20)  << left << Client.Email;
     cout << "| " << setw(10)  << left << Client.PinCode;

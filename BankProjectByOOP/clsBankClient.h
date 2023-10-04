@@ -187,6 +187,7 @@ public:
 
 	__declspec(property(get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
+	
 	bool MarkForDelete()
 	{
 		return _MarkForDelete;

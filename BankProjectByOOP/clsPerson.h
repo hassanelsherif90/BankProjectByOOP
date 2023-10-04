@@ -70,5 +70,11 @@ public:
 	}
 
 	__declspec(property(get = GetPhone, put = SetPhone)) string Phone;
+
+	string FullName()
+	{
+		return FirstName + " " + LastName;
+	}
+
 };
 

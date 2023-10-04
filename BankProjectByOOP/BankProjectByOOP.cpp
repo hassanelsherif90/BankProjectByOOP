@@ -2,6 +2,7 @@
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 #include  <iomanip>
+#include "clsUtil.h"
 
 using namespace std;
 
@@ -185,6 +186,9 @@ void ShowClientsList()
     cout << "\n___________________________________________";
     cout << "____________________________________________________________\n" << endl;
 
+    double TotalBalances = clsBankClient::GetTotalBalances();
+
+
     if (vClients.size() == 0)
         cout << "\n\t\t\tNo Clients Avaiable In the System!";
     else
@@ -197,6 +201,10 @@ void ShowClientsList()
 
     cout << "\n___________________________________________";
     cout << "____________________________________________________________\n" << endl;
+
+
+    cout << "\n\n\t\t\t\tTotal Balances = " << TotalBalances << endl;
+    cout << "\t\t\t\t\t( " << clsUtil::NumberToText(TotalBalances) << " )" << endl;
 
 }
 

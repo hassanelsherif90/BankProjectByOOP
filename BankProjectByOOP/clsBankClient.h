@@ -348,5 +348,18 @@ public:
 		return _LoadClientsDateFromFile();
 	}
 
+	static double GetTotalBalances()
+	{
+		vector <clsBankClient> vClients = GetClientsList();
+
+		double TotalBalances = 0;
+
+		for (clsBankClient C : vClients)
+		{
+			TotalBalances += C.AccountBalance;
+		}
+
+		return TotalBalances;
+	}
 };
 

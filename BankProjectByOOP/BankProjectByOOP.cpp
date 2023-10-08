@@ -7,8 +7,6 @@
 
 using namespace std;
 
-
-
 //void UpdateClient()
 //{
 //    string Account_Number ;
@@ -52,52 +50,6 @@ using namespace std;
 //        }
 //    }
 //}
-
-
-
-//void DeleteClient()
-//{
-//    string AccountNumber;
-//
-//    cout << "\nPlease Enter client Account Number : ";
-//    AccountNumber = clsInputValidate::ReadString();
-//
-//    while (!clsBankClient::IsClientExist(AccountNumber))
-//    {
-//        cout << "\nAccount number is not found, choose another one: ";
-//        AccountNumber = clsInputValidate::ReadString();
-//    }
-//
-//    clsBankClient Client1 = clsBankClient::Find(AccountNumber);
-//    Client1.Print();
-//
-//    cout << "\nAre you Want to delete Account Number ? y / n ? ";
-//
-//    char Answer = 'N';
-//    cin >> Answer;
-//
-//    if (Answer == 'y' || Answer == 'Y')
-//    {
-//        if (Client1.Delete())
-//        {
-//            cout << "\nClient Deleted Successfully :) .";
-//            Client1.Print();
-//        }
-//        else
-//        {
-//            cout << "\nError Client Was not Deleted .";
-//    }
-//    } else
-//    {
-//        cout << "\nClient Was not Deleted .";
-//    }
-//
-//}
-
-                             
-
-
-
 
 int main()
 {

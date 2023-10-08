@@ -48,8 +48,9 @@ private :
 
 
 public :
-    static void AddNewClient()
+    static void ShowAddNewClient()
     {
+        _DrawScreenHeader("\t  Add New Client\n");
         string AccountNumber;
 
         cout << "\nPlease Enter client Account Number : ";

@@ -193,7 +193,7 @@ public:
 		return _MarkForDelete;
 	}
 
-	void Print(){
+	/*void Print(){
 		cout << "\nClient Card:";
 		cout << "\n__________________________";
 		cout << "\nFirstName    : " << FirstName;
@@ -205,7 +205,7 @@ public:
 		cout << "\nPassword     : " << _PinCode;
 		cout << "\nBalance      : " << _AccountBalance;
 		cout << "\n__________________________";
-	}
+	}*/
 
 	static clsBankClient Find(string AccountNumber)
 	{

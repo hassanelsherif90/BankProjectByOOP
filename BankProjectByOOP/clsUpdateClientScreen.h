@@ -48,11 +48,11 @@ private:
         cout << "\n__________________________";
     }
 
-
 public : 
 	static void ShowUpdateClient()
 {
-        _DrawScreenHeader("\tUpdate Client\n");
+    _DrawScreenHeader("\tUpdate Client\n");
+
     string Account_Number ;
 
     cout << "\nPlease Enter client Account Number : ";
@@ -68,7 +68,7 @@ public :
    _PrintClient(Client1);
 
 
-    cout << "\n\nUpadate Client :\n";
+    cout << "\n\nUpdate Client :\n";
     cout << "_____________________";
 
     _ReadClientInfo(Client1);
@@ -89,7 +89,7 @@ public :
         
         case clsBankClient::enSaveResults::svFaildEmptyObject:
         {
-            cout << "\nError Account was not saved bescouse it�s Empty :( \n";
+            cout << "\nError Account was not saved because it�s Empty :( \n";
             break;
         }
     }

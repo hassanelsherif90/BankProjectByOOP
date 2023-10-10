@@ -32,11 +32,11 @@ private :
 		return Choice;
 	}
 
-	static void _GoToBackMenue()
+	static void _GoToBackMenu()
 	{
-		cout << setw(37) << left << "" << "Press any key to go back to Main Menue...\n ";
+		cout << setw(37) << left << "" << "Press any key to go back to Main Menu...\n ";
 		system("pause>0");
-		ShowMainMenue();
+		ShowMainMenu();
 	}
 
 	static void _ShowAllClientsScreen()
@@ -69,12 +69,12 @@ private :
 		cout << "Find Client Screen Will be here.........\n";
 	}
 
-	static void _ShowTransactionsMenueScreen()
+	static void _ShowTransactionsMenuScreen()
 	{
-		cout << "Transactions Menue Screen Will be here.........\n";
+		cout << "Transactions Menu Screen Will be here.........\n";
 	}
 
-	static void _ShowManageUsersMenue()
+	static void _ShowManageUsersMenu()
 	{
 		cout << "Manage Users Screen Will be here.........\n";
 	}
@@ -85,23 +85,23 @@ private :
 
 	}
 
-	static void _PerFormMainMenueOptions(enMainMenueOptions MainMenueOptions)
+	static void _PerFormMainMenuOptions(enMainMenueOptions MainMenuOptions)
 	{
 		
-		switch (MainMenueOptions)
+		switch (MainMenuOptions)
 		{
 			case enMainMenueOptions::eListClients:
 				{
 					system("cls");
 					_ShowAllClientsScreen();
-					_GoToBackMenue();
+					_GoToBackMenu();
 					break;
 				}
 			case enMainMenueOptions::eAddNewClient:
 				{
 					system("cls");
 					_ShowAddNewClientScreen();
-					_GoToBackMenue();
+					_GoToBackMenu();
 					break;
 
 				}
@@ -109,35 +109,35 @@ private :
 				{
 					system("cls");
 					_ShowDeleteClientScreen();
-					_GoToBackMenue();
+					_GoToBackMenu();
 					break;
 				}
 			case enMainMenueOptions::eUpdateClient:
 				{
 					system("cls");
 					_ShowUpdateClientScreen();
-					_GoToBackMenue();
+					_GoToBackMenu();
 					break;
 				}
 			case enMainMenueOptions::eFindClient:
 				{
 					system("cls");
 					_ShowFindClientScreen();
-					_GoToBackMenue();
+					_GoToBackMenu();
 					break;
 				}
 			case enMainMenueOptions::eShowTransactionsMenue:
 				{
 					system("cls");
-					_ShowTransactionsMenueScreen();
-					_GoToBackMenue();
+					_ShowTransactionsMenuScreen();
+					_GoToBackMenu();
 					break;
 				}
 			case enMainMenueOptions::eManageUsers:
 				{
 					system("cls");
-					_ShowManageUsersMenue();
-					_GoToBackMenue();
+					_ShowManageUsersMenu();
+					_GoToBackMenu();
 					break;
 				}
 			case enMainMenueOptions::eExit:
@@ -152,7 +152,7 @@ private :
 
 public :
 
-	static void ShowMainMenue()
+	static void ShowMainMenu()
 	{
 		system("cls");
 		_DrawScreenHeader("\t\tMain Screen");
@@ -170,7 +170,7 @@ public :
 		cout << setw(37) << left << "" << "\t[ 8 ] Logout.\n";
 		cout << setw(37) << left << "" << "============================================\n";
 		
-		_PerFormMainMenueOptions((enMainMenueOptions)_ReadMainMenuOption());
+		_PerFormMainMenuOptions((enMainMenueOptions)_ReadMainMenuOption());
 	}
 };
 

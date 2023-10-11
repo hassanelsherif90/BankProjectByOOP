@@ -9,6 +9,7 @@
 #include "clsDeleteClientScreen.h"
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
+#include "clsTransactionsMenuScreen.h"
 
 using namespace std;
 
@@ -73,7 +74,8 @@ private :
 
 	static void _ShowTransactionsMenuScreen()
 	{
-		cout << "Transactions Menu Screen Will be here.........\n";
+		//cout << "Transactions Menu Screen Will be here.........\n";
+		clsTransactionsMenuScreen::ShowTransactionsMenu();
 	}
 
 	static void _ShowManageUsersMenu()
@@ -132,7 +134,7 @@ private :
 				{
 					system("cls");
 					_ShowTransactionsMenuScreen();
-					_GoToBackMenu();
+					/*_GoToBackMenu();*/
 					break;
 				}
 			case enMainMenueOptions::eManageUsers:

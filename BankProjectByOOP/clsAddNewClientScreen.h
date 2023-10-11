@@ -85,12 +85,12 @@ public :
 
         case clsBankClient::enSaveResults::svFaildEmptyObject:
         {
-            cout << "\nError Account was not saved bescouse it�s Empty :( \n";
+            cout << "\nError Account was not saved because it�s Empty :( \n";
             break;
         }
         case  clsBankClient::enSaveResults::svFaildAccountNumberExsit:
         {
-            cout << "\nAccount number is alraedy Used";
+            cout << "\nAccount number is already Used";
             break;
         }
         }

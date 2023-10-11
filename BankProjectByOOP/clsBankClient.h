@@ -361,5 +361,35 @@ public:
 
 		return TotalBalances;
 	}
+
+	static vector <clsBankClient> LoadClientsDateFromFile()
+	{
+		return _LoadClientsDateFromFile();
+	}
+
+	static void SaveClientDataToFile(vector <clsBankClient> vClients)
+	{
+		_SaveClientDataToFile(vClients);
+	}
+
+	void Deposit(double Amount)
+	{
+		_AccountBalance += Amount;
+		Save();
+	}
+	
+	bool Withdraw(double Amount)
+	{
+		if (Amount > _AccountBalance)
+		{
+			return false;
+		}
+		else
+		{
+			_AccountBalance -= Amount;
+			Save();
+
+		}
+	}
 };
 

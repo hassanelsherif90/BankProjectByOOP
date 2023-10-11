@@ -51,21 +51,22 @@ public:
 		cin >> Answer;
 		if (Answer == 'y' || Answer == 'Y')
 		{
-			if (!Client.Withdraw(Amount))
+			if (Client.Withdraw(Amount))
+			{
+				cout << "\nAmount Withdraw Successfully :) \n";
+				cout << "\nNew Balances : " << Client.AccountBalance << endl;
+				
+			}
+			else
 			{
 				cout << "\nCannot withdraw, Insufficient Balance ! \n";
 				cout << "\nAmount to withdraw amount ? " << Amount << endl;
 				cout << "\nYour Balance is : " << Client.AccountBalance << endl;
 			}
-			else
-			{
-				cout << "\nAmount Withdraw Successfully :) \n";
-				cout << "\nNew Balances : " << Client.AccountBalance << endl;
-			}
 		}
 		else
 		{
-			cout << "\nOperation Canceled !\n\n";
+			cout << "\nOperation Was Canceled !\n\n";
 		}
 
 	}

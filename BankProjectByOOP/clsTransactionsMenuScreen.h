@@ -7,6 +7,7 @@
 #include "clsMainScreen.h"
 #include "clsDepositScreen.h"
 #include "clsWithdrawScreen.h"
+#include "clsTotalBalanceScreen.h"
 
 using namespace std;
 
@@ -19,7 +20,7 @@ private :
 		enDeposit = 1,
 		enWithdraw = 2,
 		enTotalBalance = 3,
-		enMainMenu = 4
+		eShowMainMenu = 4
 	};
 
 
@@ -44,12 +45,8 @@ private :
 
 	static void _ShowTotalalBalance()
 	{
-		cout << "Totalal Balance Will be here.........\n";
-	}
-
-	static void _ShowMainScreen()
-	{
-		
+		//cout << "Totalal Balance Will be here.........\n";
+		clsTotalBalanceScreen::ShowTotalbalances();
 	}
 
 	static void _GoToBackTransactions()
@@ -63,27 +60,33 @@ private :
 	{
 		switch (TransactionsMenuOption)
 		{
-		case enTransactionsMenuOptions::enDeposit:
-			system("cls");
-			_ShowTransactionsDeposit();
-			_GoToBackTransactions();
-			break;
+			case enTransactionsMenuOptions::enDeposit:
+			{
+				system("cls");
+				_ShowTransactionsDeposit();
+				_GoToBackTransactions();
+				break;
+			}
+			case enTransactionsMenuOptions::enWithdraw:
+			{
+				system("cls");
+				_ShowTransactionswithdraw();
+				_GoToBackTransactions();
+				break;
+			}
 
-		case enTransactionsMenuOptions::enWithdraw:
-			system("cls");
-			_ShowTransactionswithdraw();
-			_GoToBackTransactions();
-			break;
+			case enTransactionsMenuOptions::enTotalBalance:
+			{
+				system("cls");
+				_ShowTotalalBalance();
+				_GoToBackTransactions();
+				break;
+			}
+			case enTransactionsMenuOptions::eShowMainMenu:
+			{
 
-		case enTransactionsMenuOptions::enTotalBalance:
-			system("cls");
-			_ShowTotalalBalance();
-			_GoToBackTransactions();
-			break;
-
-		case enTransactionsMenuOptions::enMainMenu:
-			cout << "Will Handle it";
-			break;
+			}
+		
 		}
 	}
 

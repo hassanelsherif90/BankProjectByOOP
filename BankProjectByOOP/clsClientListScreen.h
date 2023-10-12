@@ -31,7 +31,7 @@ public:
         cout << setw(8) << left << "" << "\n\t___________________________________________";
         cout << "____________________________________________________________\n" << endl;
         cout << setw(8) << left << "" << "| " << left << setw(15) << "Account Number";
-        cout << "| " << left << setw(20) << "Client Nmae";
+        cout << "| " << left << setw(20) << "Client Name";
         cout << "| " << left << setw(12) << "Phone";
         cout << "| " << left << setw(20) << "Email";
         cout << "| " << left << setw(10) << "Pin Code";
@@ -43,7 +43,7 @@ public:
 
 
         if (vClients.size() == 0)
-            cout << "\n\t\t\tNo Clients Avaiable In the System!";
+            cout << "\n\t\t\tNo Clients Available In the System!";
         else
 
             for (clsBankClient C : vClients)
@@ -54,6 +54,9 @@ public:
 
         cout << setw(8) << left << "\n\t___________________________________________";
         cout << "____________________________________________________________\n" << endl;
+
+        
+        
 
     }
 };

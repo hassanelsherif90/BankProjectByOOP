@@ -9,6 +9,7 @@
 #include "clsAddNewUserScreen.h"
 #include "clsDeleteUserScreen.h"
 #include "clsUpdateUserScreen.h"
+#include "clsFindUserScreen.h"
 
 using namespace std;
 
@@ -68,7 +69,8 @@ private :
 
     static void _ShowFindUserScreen()
     {
-        cout << "\nFind User Screen Will Be Here.\n";
+        //cout << "\nFind User Screen Will Be Here.\n";
+        clsFindUserScreen::ShowFindUser();
     }
 
     static void _PerformManageUsersMenuOption(enUsersMenuOptions ManageUsersMenuOption)

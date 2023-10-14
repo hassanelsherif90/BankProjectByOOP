@@ -11,7 +11,7 @@ class clsAddNewUserScreen : protected clsScreen
     private:
         static void _ReadUserInfo(clsUser& User)
         {
-
+            cout << "\nRead User Info :\n\n";
             cout << "\nFirstName      : ";
             User.FirstName = clsInputValidate::ReadString();
 

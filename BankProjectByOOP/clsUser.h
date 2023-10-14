@@ -23,25 +23,25 @@ private:
 
     bool _MarkedForDelete = false;
 
-    static clsUser _ConvertLinetoUserObject(string Line, string Seperator = "#//#")
+    static clsUser _ConvertLineToUserObject(string Line, string Separator = "#//#")
     {
         vector<string> vUserData;
-        vUserData = clsString::Split(Line, Seperator);
+        vUserData = clsString::Split(Line, Separator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
             vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
     }
 
-    static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#")
+    static string _ConvertUserObjectToLine(clsUser User, string Separator = "#//#")
     {
 
         string UserRecord = "";
-        UserRecord += User.FirstName + Seperator;
-        UserRecord += User.LastName + Seperator;
-        UserRecord += User.Email + Seperator;
-        UserRecord += User.Phone + Seperator;
-        UserRecord += User.UserName + Seperator;
-        UserRecord += User.Password + Seperator;
+        UserRecord += User.FirstName + Separator;
+        UserRecord += User.LastName + Separator;
+        UserRecord += User.Email + Separator;
+        UserRecord += User.Phone + Separator;
+        UserRecord += User.UserName + Separator;
+        UserRecord += User.Password + Separator;
         UserRecord += to_string(User.Permissions);
 
         return UserRecord;
@@ -61,7 +61,7 @@ private:
             string Line;
             while (getline(MyFile, Line))
             {
-                clsUser User = _ConvertLinetoUserObject(Line);
+                clsUser User = _ConvertLineToUserObject(Line);
                 vUsers.push_back(User);
             }
 
@@ -87,7 +87,7 @@ private:
                 if (U.MarkedForDeleted() == false)
                 {
                     // we only write records that are not marked for delete.
-                    DataLine = _ConverUserObjectToLine(U);
+                    DataLine = _ConvertUserObjectToLine(U);
                     MyFile << DataLine << endl;
                 }
             }
@@ -116,7 +116,7 @@ private:
     void _AddNew()
     {
 
-        _AddDataLineToFile(_ConverUserObjectToLine(*this));
+        _AddDataLineToFile(_ConvertUserObjectToLine(*this));
     }
 
     void _AddDataLineToFile(string stDataLine)
@@ -139,6 +139,13 @@ private:
     }
 
 public:
+
+    enum enMainMenuPermissions
+    {
+        eAll = -1, pListClients = 1, pAddNewClient = 2 ,pDeleteClient = 4, 
+        pUpdateClients = 8, pFindClient = 16,pTranactiond = 32, pManageUsers = 64
+    };
+
     clsUser(enMode Mode, string FirstName, string LastName,
         string Email, string Phone, string UserName, string Password,
         int Permissions) : clsPerson(FirstName, LastName, Email, Phone)
@@ -181,6 +188,7 @@ public:
     {
         return _Password;
     }
+
     __declspec(property(get = GetPassword, put = SetPassword)) string Password;
 
     void SetPermissions(int Permissions)
@@ -205,7 +213,7 @@ public:
             string Line;
             while (getline(MyFile, Line))
             {
-                clsUser User = _ConvertLinetoUserObject(Line);
+                clsUser User = _ConvertLineToUserObject(Line);
                 if (User.UserName == UserName)
                 {
                     MyFile.close();
@@ -230,7 +238,7 @@ public:
             string Line;
             while (getline(MyFile, Line))
             {
-                clsUser User = _ConvertLinetoUserObject(Line);
+                clsUser User = _ConvertLineToUserObject(Line);
                 if (User.UserName == UserName && User.Password == Password)
                 {
                     MyFile.close();
@@ -255,39 +263,39 @@ public:
 
         switch (_Mode)
         {
-        case enMode::EmptyMode:
-        {
-            if (IsEmpty())
-            {
-                return enSaveResults::svFaildEmptyObject;
-            }
-        }
+            case enMode::EmptyMode:
+                {
+                    if (IsEmpty())
+                    {
+                        return enSaveResults::svFaildEmptyObject;
+                    }
+                }
 
-        case enMode::UpdateMode:
-        {
-            _Update();
-            return enSaveResults::svSucceeded;
+            case enMode::UpdateMode:
+                {
+                    _Update();
+                    return enSaveResults::svSucceeded;
 
-            break;
-        }
+                    break;
+                }
 
-        case enMode::AddNewMode:
-        {
-            // This will add new record to file or database
-            if (clsUser::IsUserExist(_UserName))
-            {
-                return enSaveResults::svFaildUserExists;
-            }
-            else
-            {
-                _AddNew();
-                // We need to set the mode to update after add new
-                _Mode = enMode::UpdateMode;
-                return enSaveResults::svSucceeded;
-            }
+            case enMode::AddNewMode:
+                {
+                    // This will add new record to file or database
+                    if (clsUser::IsUserExist(_UserName))
+                        {
+                            return enSaveResults::svFaildUserExists;
+                        }
+                    else
+                        {
+                            _AddNew();
+                            // We need to set the mode to update after add new
+                            _Mode = enMode::UpdateMode;
+                            return enSaveResults::svSucceeded;
+                        }
 
-            break;
-        }
+                    break;
+                }
         }
     }
 

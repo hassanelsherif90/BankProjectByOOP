@@ -6,6 +6,9 @@
 #include "clsInputValidate.h"
 #include "clsMainScreen.h"
 #include "clsUserListScreen.h"
+#include "clsAddNewUserScreen.h"
+#include "clsDeleteUserScreen.h"
+#include "clsUpdateUserScreen.h"
 
 using namespace std;
 
@@ -46,19 +49,21 @@ private :
 
     static void _ShowAddNewUserScreen()
     {
-        cout << "\nAdd New User Screen Will Be Here.\n";
-
+        //cout << "\nAdd New User Screen Will Be Here.\n";
+        clsAddNewUserScreen::ShowAddNewUser();
     }
 
     static void _ShowDeleteUserScreen()
     {
-        cout << "\nDelete User Screen Will Be Here.\n";
+        //cout << "\nDelete User Screen Will Be Here.\n";
+        clsDeleteUserScreen::ShowDeleteUser();
 
     }
 
     static void _ShowUpdateUserScreen()
     {
-        cout << "\nUpdate User Screen Will Be Here.\n";
+        //cout << "\nUpdate User Screen Will Be Here.\n";
+        clsUpdateUserScreen::ShowUpdateUser();
     }
 
     static void _ShowFindUserScreen()
@@ -129,14 +134,14 @@ public:
         _DrawScreenHeader("\t Manage Users Screen");
 
         cout << setw(37) << left << "" << "===========================================\n";
-        cout << setw(37) << left << "" << "\t\t  Manage Users Menue\n";
+        cout << setw(37) << left << "" << "\t\t  Manage Users Menu\n";
         cout << setw(37) << left << "" << "===========================================\n";
         cout << setw(37) << left << "" << "\t[1] List Users.\n";
         cout << setw(37) << left << "" << "\t[2] Add New User.\n";
         cout << setw(37) << left << "" << "\t[3] Delete User.\n";
         cout << setw(37) << left << "" << "\t[4] Update User.\n";
         cout << setw(37) << left << "" << "\t[5] Find User.\n";
-        cout << setw(37) << left << "" << "\t[6] Main Menue.\n";
+        cout << setw(37) << left << "" << "\t[6] Main Menu.\n";
         cout << setw(37) << left << "" << "===========================================\n";
 
         _PerformManageUsersMenuOption((enUsersMenuOptions)ReadManageUsersMenuOption());

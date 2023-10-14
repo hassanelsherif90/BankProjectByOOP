@@ -4,12 +4,11 @@
 #include "clsBankClient.h"
 #include "clsInputValidate.h"
 
-
 class clsAddNewClientScreen : protected clsScreen
 {
 
-private :
-   static void _ReadClientInfo(clsBankClient& Client)
+private:
+    static void _ReadClientInfo(clsBankClient &Client)
     {
 
         cout << "\nFirstName      : ";
@@ -29,25 +28,24 @@ private :
 
         cout << "\nAccountBalance : ";
         Client.AccountBalance = clsInputValidate::ReadFloatNumber();
-
     }
 
-   static void _PrintClient(clsBankClient Client) {
-       cout << "\nClient Card:";
-       cout << "\n__________________________";
-       cout << "\nFirstName    : " << Client.FirstName;
-       cout << "\nLastName     : " << Client.LastName;
-       cout << "\nFull Name    : " << Client.FullName();
-       cout << "\nEmail        : " << Client.Email;
-       cout << "\nPhone        : " << Client.Phone;
-       cout << "\nAcc. Number  : " << Client.AccountNumber();
-       cout << "\nPassword     : " << Client.PinCode;
-       cout << "\nBalance      : " << Client.AccountBalance;
-       cout << "\n__________________________";
-   }
+    static void _PrintClient(clsBankClient Client)
+    {
+        cout << "\nClient Card:";
+        cout << "\n__________________________";
+        cout << "\nFirstName    : " << Client.FirstName;
+        cout << "\nLastName     : " << Client.LastName;
+        cout << "\nFull Name    : " << Client.FullName();
+        cout << "\nEmail        : " << Client.Email;
+        cout << "\nPhone        : " << Client.Phone;
+        cout << "\nAcc. Number  : " << Client.AccountNumber();
+        cout << "\nPassword     : " << Client.PinCode;
+        cout << "\nBalance      : " << Client.AccountBalance;
+        cout << "\n__________________________";
+    }
 
-
-public :
+public:
     static void ShowAddNewClient()
     {
         _DrawScreenHeader("\t  Add New Client\n");
@@ -88,7 +86,7 @@ public :
             cout << "\nError Account was not saved because it�s Empty :( \n";
             break;
         }
-        case  clsBankClient::enSaveResults::svFaildAccountNumberExsit:
+        case clsBankClient::enSaveResults::svFaildAccountNumberExsit:
         {
             cout << "\nAccount number is already Used";
             break;
@@ -98,4 +96,3 @@ public :
         cout << endl;
     }
 };
-

@@ -62,7 +62,7 @@ public:
                 Counter++;
             }
 
-            //erase() until positon and move to next word.
+            //erase() until position and move to next word.
             S1.erase(0, pos + delim.length());
         }
 
@@ -330,7 +330,7 @@ public:
                 vString.push_back(sWord);
             //}
 
-            S1.erase(0, pos + Delim.length());  /* erase() until positon and move to next word. */
+            S1.erase(0, pos + Delim.length());  /* erase() until position and move to next word. */
         }
 
         if (S1 != "")
@@ -374,7 +374,7 @@ public:
         {
             if (S1[i] != ' ')
             {
-                return S1.substr(0, i + 1);
+                return S1.substr(0,i + 1);
             }
         }
         return "";
@@ -455,7 +455,7 @@ public:
         _Value = ReverseWordsInString(_Value);
     }
 
-    static string ReplaceWord(string S1, string StringToReplace, string sRepalceTo, bool MatchCase = true)
+    static string ReplaceWord(string S1, string StringToReplace, string sReplaceTo, bool MatchCase = true)
     {
 
         vector<string> vString = Split(S1, " ");
@@ -467,7 +467,7 @@ public:
             {
                 if (s == StringToReplace)
                 {
-                    s = sRepalceTo;
+                    s = sReplaceTo;
                 }
 
             }
@@ -475,7 +475,7 @@ public:
             {
                 if (LowerAllString(s) == LowerAllString(StringToReplace))
                 {
-                    s = sRepalceTo;
+                    s = sReplaceTo;
                 }
 
             }
@@ -485,9 +485,9 @@ public:
         return JoinString(vString, " ");
     }
 
-    string ReplaceWord(string StringToReplace, string sRepalceTo)
+    string ReplaceWord(string StringToReplace, string sReplaceTo)
     {
-        return ReplaceWord(_Value, StringToReplace, sRepalceTo);
+        return ReplaceWord(_Value, StringToReplace, sReplaceTo);
     }
 
     static string RemovePunctuations(string S1)

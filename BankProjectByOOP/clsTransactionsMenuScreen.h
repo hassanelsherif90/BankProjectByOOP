@@ -94,6 +94,10 @@ public:
 	
 	static void ShowTransactionsMenu()
 	{
+		if (!CheckAccessRights(clsUser::enPermissions::pTranactiond))
+		{
+			return;
+		}
 		system("cls");
 		_DrawScreenHeader("\tTransActions Menu Screen");
 		cout <<setw(37) << left << "" << "=====================================================\n\n";

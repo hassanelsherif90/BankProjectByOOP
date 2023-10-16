@@ -13,6 +13,7 @@ class clsUpdateClientScreen : protected clsScreen
 private:
     static void _ReadClientInfo(clsBankClient& Client)
     {
+       
 
         cout << "\nFirstName      : ";
         Client.FirstName = clsInputValidate::ReadString();
@@ -51,6 +52,10 @@ private:
 public : 
 	static void ShowUpdateClient()
 {
+        if (!CheckAccessRights(clsUser::enPermissions::pUpdateClients))
+        {
+            return;
+        }
     _DrawScreenHeader("\tUpdate Client\n");
 
     string Account_Number ;

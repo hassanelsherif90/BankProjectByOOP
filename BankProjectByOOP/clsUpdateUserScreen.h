@@ -61,49 +61,49 @@ private:
         cin >> answer;
         if (answer == 'y' || answer == 'Y')
         {
-            Permissions += clsUser::enMainMenuPermissions::pListClients;
+            Permissions += clsUser::enPermissions::pListClients;
         }
 
         cout << "\nAdd New Client ? y/n ";
         cin >> answer;
         if (answer == 'y' || answer == 'Y')
         {
-            Permissions += clsUser::enMainMenuPermissions::pAddNewClient;
+            Permissions += clsUser::enPermissions::pAddNewClient;
         }
 
         cout << "\nDelete Client ? y/n ";
         cin >> answer;
         if (answer == 'y' || answer == 'Y')
         {
-            Permissions += clsUser::enMainMenuPermissions::pDeleteClient;
+            Permissions += clsUser::enPermissions::pDeleteClient;
         }
 
         cout << "\nUpdate Client ? y/n ";
         cin >> answer;
         if (answer == 'y' || answer == 'Y')
         {
-            Permissions += clsUser::enMainMenuPermissions::pUpdateClients;
+            Permissions += clsUser::enPermissions::pUpdateClients;
         }
 
         cout << "\nFind Client ? y/n ";
         cin >> answer;
         if (answer == 'y' || answer == 'Y')
         {
-            Permissions += clsUser::enMainMenuPermissions::pFindClient;
+            Permissions += clsUser::enPermissions::pFindClient;
         }
 
         cout << "\nTransactions ? y/n ";
         cin >> answer;
         if (answer == 'y' || answer == 'Y')
         {
-            Permissions += clsUser::enMainMenuPermissions::pTranactiond;
+            Permissions += clsUser::enPermissions::pTranactiond;
         }
 
         cout << "\nManage user ? y/n ";
         cin >> answer;
         if (answer == 'y' || answer == 'Y')
         {
-            Permissions += clsUser::enMainMenuPermissions::pTranactiond;
+            Permissions += clsUser::enPermissions::pTranactiond;
         }
 
         return Permissions;

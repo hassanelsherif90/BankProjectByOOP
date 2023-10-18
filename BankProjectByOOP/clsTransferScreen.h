@@ -49,21 +49,25 @@ public :
 		cout << "\nPlease Enter Transfer amount ? ";
 		double Amount = clsInputValidate::ReadDblNumber();
 
-		cout << "\nAre you sure want perform this transaction? y / n ? ";
+		cout << "\nAre you sure want perform this Operation? y / n ? ";
 		char Answer;
 		cin >> Answer;
 		if (Answer == 'y' || Answer == 'Y')
 		{
-			Client1.Withdraw(Amount);
-			Client2.Deposit(Amount);
-			cout << "\nAmount Transfer Successfully :) \n\n";
-			_PrintClient(Client1);
-			_PrintClient(Client1);
+			if (Client1.Transfer(Amount, Client2))
+			{
+				cout << "\nThe amount has been transferred successfully :) \n\n";
+				
+			}
+			else
+			{
+				cout << "\nOperation Canceled !\n\n";
+			}
+			
 		}
-		else
-		{
-			cout << "\nOperation Canceled !\n\n";
-		}
+		
+		_PrintClient(Client1);
+		_PrintClient(Client2);
 
 	}
 

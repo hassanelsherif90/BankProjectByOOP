@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "clsDate.h"
 
 using namespace std;
 class clsUser : public clsPerson
@@ -22,6 +23,34 @@ private:
     int _Permissions;
 
     bool _MarkedForDelete = false;
+
+    struct stLoginRegisterRecord;
+
+    string _PrepareLogin(string separator = "#//#")
+    {
+        string RecordLogin = "";
+        RecordLogin += clsDate::GetSystemDateString() + separator;
+        RecordLogin += UserName + separator;
+        RecordLogin += Password + separator;
+        RecordLogin += to_string(Permissions);
+
+        return RecordLogin;
+
+    }
+
+    static stLoginRegisterRecord _ConvertLineToRegisterRecord(string Line, string Separator = "#//#")
+    {
+        stLoginRegisterRecord stLoginRecord;
+        vector <string> vLoginRecord = clsString::Split(Line, Separator);
+
+        stLoginRecord.DateTime = vLoginRecord[0];
+        stLoginRecord.UserName = vLoginRecord[1];
+        stLoginRecord.Password = vLoginRecord[2];
+        stLoginRecord.Permissions = stoi(vLoginRecord[3]);
+
+        return stLoginRecord;
+
+    }
 
     static clsUser _ConvertLineToUserObject(string Line, string Separator = "#//#")
     {
@@ -142,8 +171,17 @@ public:
 
     enum enPermissions
     {
-        eAll = -1, pListClients = 1, pAddNewClient = 2 ,pDeleteClient = 4, 
-        pUpdateClients = 8, pFindClient = 16,pTranactiond = 32, pManageUsers = 64
+        eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4,
+        pUpdateClients = 8, pFindClient = 16, pTranactiond = 32, pManageUsers = 64,
+        pLoginRegisterRecord = 128
+    };
+
+    struct stLoginRegisterRecord
+    {
+        string UserName;
+        string Password;
+        string DateTime;
+        int Permissions;
     };
 
     clsUser(enMode Mode, string FirstName, string LastName,
@@ -349,4 +387,48 @@ public:
         else
             return false;
     }
+
+    void RegisterLogin()
+    {
+        string stDate = _PrepareLogin();
+
+        fstream MyFile;
+
+        MyFile.open("LogRegister.txt", ios::out | ios::app);
+
+        if (MyFile.is_open())
+        {
+            MyFile << stDate << endl;
+            MyFile.close();
+        }
+
+
+    }
+
+    static vector <stLoginRegisterRecord> GetLoadRegisterUser()
+    {
+
+        vector<stLoginRegisterRecord> vLoginRegisterRecord;
+
+        fstream MyFile;
+        MyFile.open("LogRegister.txt", ios::in); // read Mode
+
+        if (MyFile.is_open())
+        {
+
+            string Line;
+            stLoginRegisterRecord LoginRegisterRecord;
+
+            while (getline(MyFile, Line))
+            {
+                LoginRegisterRecord = _ConvertLineToRegisterRecord(Line);
+                vLoginRegisterRecord.push_back(LoginRegisterRecord);
+            }
+
+            MyFile.close();
+        }
+
+        return vLoginRegisterRecord;
+    }
+
 };

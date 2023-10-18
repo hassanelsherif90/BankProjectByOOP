@@ -106,6 +106,14 @@ class clsAddNewUserScreen : protected clsScreen
                 Permissions += clsUser::enPermissions::pTranactiond;
             }
 
+
+            cout << "\nLogin Register Record ? y/n ";
+            cin >> answer;
+            if (answer == 'y' || answer == 'Y')
+            {
+                Permissions += clsUser::enPermissions::pLoginRegisterRecord;
+            }
+
             return Permissions;
         }
 

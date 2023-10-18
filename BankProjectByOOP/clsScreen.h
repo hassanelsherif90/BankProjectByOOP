@@ -27,8 +27,6 @@ protected:
         clsDate Date;
         cout << "\n\t\t\t\t\tDate : " <<  Date.DateToString(clsDate()) << endl;
        
-     
-
 	}
 
 

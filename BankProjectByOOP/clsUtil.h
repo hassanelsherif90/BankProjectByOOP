@@ -181,7 +181,7 @@ public:
         return Text;
     }
 
-    static string DescryptedText(string Text, short EncryptionKey)
+    static string DescriptedText(string Text, short EncryptionKey)
     {
         for (int i = 0; i <= Text.length(); i++)
         {

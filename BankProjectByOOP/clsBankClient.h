@@ -19,7 +19,8 @@ private:
 	string _PinCode;
 	float _AccountBalance;
 	bool _MarkForDelete = false;
-
+	struct stLoginBankClient;
+	
 	string _PrepareTransferLog(float Amount, clsBankClient DestinationClient,string UserName, string Separator = "#//#")
 	{
 		string RecordLine = "";
@@ -34,6 +35,39 @@ private:
 
 		return RecordLine;
 	}
+
+	void _RegisterTransferLog(float Amount, clsBankClient DestinationClient, string UserName)
+	{
+		string stDate = _PrepareTransferLog(Amount, DestinationClient, UserName);
+		fstream MyFile;
+
+		MyFile.open("LogTransfer.txt", ios::out | ios::app);
+
+		if (MyFile.is_open())
+		{
+			MyFile << stDate << endl;
+			MyFile.close();
+		}
+	}
+
+	static stLoginBankClient _ConvertTransferLineToObject(string Line, string Separator = "#//#")
+	{
+		stLoginBankClient stRecordTransferLog;
+
+		vector <string> sTransferLog = clsString::Split(Line, Separator);
+
+		stRecordTransferLog.DateTime   = sTransferLog[0];
+		stRecordTransferLog.surAcct    = sTransferLog[1];
+		stRecordTransferLog.desAcct    = sTransferLog[2];
+		stRecordTransferLog.Amount     = stof(sTransferLog[3]);
+		stRecordTransferLog.surBalance = stof(sTransferLog[4]);
+		stRecordTransferLog.desBalance = stof(sTransferLog[5]);
+		stRecordTransferLog.UserName   = sTransferLog[6];
+		return stRecordTransferLog;
+
+
+	}
+
 
 	static clsBankClient _ConvertLineToClientObject(string Line, string Separator = "#//#")
 	{
@@ -156,6 +190,17 @@ private:
 	}
 
 public:
+
+	struct stLoginBankClient
+	{
+		string DateTime;
+		string surAcct;
+		string desAcct;
+		float Amount;
+		float surBalance;
+		float desBalance;
+		string UserName; };
+
 
 	clsBankClient(enMode Mode, string FirstName, string LastName, string Email,
 		string Phone, string AccountNumber,
@@ -416,23 +461,34 @@ public:
 		}
 		Withdraw(Amount);
 		DestinationClient.Deposit(Amount);
-		RegisterTransferLog(Amount, DestinationClient, UserName);
+		_RegisterTransferLog(Amount, DestinationClient, UserName);
 		return true;
 	}
 
-	void RegisterTransferLog(float Amount, clsBankClient DestinationClient, string UserName)
+	static vector <stLoginBankClient> GetLoadTransferLog()
 	{
-		string stDate = _PrepareTransferLog(Amount, DestinationClient,  UserName);
+		stLoginBankClient RecordTransferLog;
+
 		fstream MyFile;
 
-		MyFile.open("LogTransfer.txt", ios::out | ios::app);
+		MyFile.open("LogTransfer.txt", ios::in);
+
+		vector <stLoginBankClient> vTransferLog;
 
 		if (MyFile.is_open())
 		{
-			MyFile << stDate << endl;
+			string Line;
+			while (getline(MyFile, Line))
+			{
+				RecordTransferLog = _ConvertTransferLineToObject(Line);
+				vTransferLog.push_back(RecordTransferLog);
+			}
 			MyFile.close();
 		}
+		return vTransferLog;
 	}
+
+	
 
 };
 

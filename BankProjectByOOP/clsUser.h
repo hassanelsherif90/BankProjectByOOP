@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "clsDate.h"
+#include "clsUtil.h"
 
 using namespace std;
 class clsUser : public clsPerson
@@ -25,6 +26,8 @@ private:
     bool _MarkedForDelete = false;
 
     struct stLoginRegisterRecord;
+
+
 
     string _PrepareLogin(string separator = "#//#")
     {
@@ -52,13 +55,15 @@ private:
 
     }
 
+    static const short encryptionKey = 20;
+
     static clsUser _ConvertLineToUserObject(string Line, string Separator = "#//#")
     {
         vector<string> vUserData;
         vUserData = clsString::Split(Line, Separator);
 
         return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-            vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+            vUserData[3], vUserData[4], clsUtil::DescriptedText(vUserData[5], encryptionKey), stoi(vUserData[6]));
     }
 
     static string _ConvertUserObjectToLine(clsUser User, string Separator = "#//#")
@@ -70,7 +75,8 @@ private:
         UserRecord += User.Email + Separator;
         UserRecord += User.Phone + Separator;
         UserRecord += User.UserName + Separator;
-        UserRecord += User.Password + Separator;
+        UserRecord += clsUtil::EncryptedText((User.Password), encryptionKey) + Separator;
+        //UserRecord += (User.Password) + Separator;
         UserRecord += to_string(User.Permissions);
 
         return UserRecord;
@@ -429,4 +435,5 @@ public:
         return vLoginRegisterRecord;
     }
 
+ 
 };

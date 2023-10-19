@@ -401,8 +401,6 @@ public:
             MyFile << stDate << endl;
             MyFile.close();
         }
-
-
     }
 
     static vector <stLoginRegisterRecord> GetLoadRegisterUser()

@@ -18,6 +18,7 @@ class clsTransferScreen : protected clsScreen
 		cout << "\nFull Name  : " << Client.FullName();
 		cout << "\nAcc Number : " << Client.AccountNumber();
 		cout << "\nBalance    : " << Client.AccountBalance;
+		cout << "\n_______________________\n\n";
 	}
 
 	static string _ReadAccountNumber()
@@ -37,6 +38,7 @@ public :
 
 	static void ShowTransferScreen()
 	{
+		_DrawScreenHeader("\t Transfer Amount\n");
 		cout << "\nPlease Enter client Account Number Transfer From : ";
 		clsBankClient Client1 = clsBankClient::Find(_ReadAccountNumber());
 
@@ -54,7 +56,7 @@ public :
 		cin >> Answer;
 		if (Answer == 'y' || Answer == 'Y')
 		{
-			if (Client1.Transfer(Amount, Client2))
+			if (Client1.Transfer(Amount, Client2, CurrentUser.UserName))
 			{
 				cout << "\nThe amount has been transferred successfully :) \n\n";
 				

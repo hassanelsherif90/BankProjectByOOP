@@ -4,6 +4,7 @@
 #include <fstream>
 #include "clsString.h"
 #include "clsPerson.h"
+#include "clsDate.h"
 
 using namespace std;
 
@@ -18,6 +19,21 @@ private:
 	string _PinCode;
 	float _AccountBalance;
 	bool _MarkForDelete = false;
+
+	string _PrepareTransferLog(float Amount, clsBankClient DestinationClient,string UserName, string Separator = "#//#")
+	{
+		string RecordLine = "";
+
+		RecordLine += clsDate::GetSystemDateString()+ Separator;
+		RecordLine += this->AccountNumber() + Separator;
+		RecordLine += DestinationClient.AccountNumber() + Separator;
+		RecordLine += to_string(Amount) + Separator;
+		RecordLine += to_string(this->AccountBalance) + Separator;
+		RecordLine += to_string(DestinationClient.AccountBalance) + Separator;
+		RecordLine += UserName;
+
+		return RecordLine;
+	}
 
 	static clsBankClient _ConvertLineToClientObject(string Line, string Separator = "#//#")
 	{
@@ -392,7 +408,7 @@ public:
 		}
 	}
 
-	bool Transfer(float Amount, clsBankClient& DestinationClient)
+	bool Transfer(float Amount, clsBankClient& DestinationClient , string UserName)
 	{
 		if (Amount > AccountBalance)
 		{
@@ -400,7 +416,23 @@ public:
 		}
 		Withdraw(Amount);
 		DestinationClient.Deposit(Amount);
+		RegisterTransferLog(Amount, DestinationClient, UserName);
 		return true;
 	}
+
+	void RegisterTransferLog(float Amount, clsBankClient DestinationClient, string UserName)
+	{
+		string stDate = _PrepareTransferLog(Amount, DestinationClient,  UserName);
+		fstream MyFile;
+
+		MyFile.open("LogTransfer.txt", ios::out | ios::app);
+
+		if (MyFile.is_open())
+		{
+			MyFile << stDate << endl;
+			MyFile.close();
+		}
+	}
+
 };
 

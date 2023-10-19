@@ -34,7 +34,7 @@ private:
         string RecordLogin = "";
         RecordLogin += clsDate::GetSystemDateString() + separator;
         RecordLogin += UserName + separator;
-        RecordLogin += Password + separator;
+        RecordLogin += clsUtil::EncryptedText(Password, encryptionKey) + separator;
         RecordLogin += to_string(Permissions);
 
         return RecordLogin;
@@ -48,7 +48,7 @@ private:
 
         stLoginRecord.DateTime = vLoginRecord[0];
         stLoginRecord.UserName = vLoginRecord[1];
-        stLoginRecord.Password = vLoginRecord[2];
+        stLoginRecord.Password = clsUtil::DescriptedText (vLoginRecord[2], encryptionKey);
         stLoginRecord.Permissions = stoi(vLoginRecord[3]);
 
         return stLoginRecord;

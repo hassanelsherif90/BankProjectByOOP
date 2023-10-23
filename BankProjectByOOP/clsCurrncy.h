@@ -1,16 +1,22 @@
 #pragma once
 
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 #include "clsString.h"
 #include <vector>
 #include <fstream>
+
+using namespace std;
+
 class clsCurrency
 {
 
 private:
-
-    enum enMode { EmptyMode = 0, UpdateMode = 1 };
+    enum enMode
+    {
+        EmptyMode = 0,
+        UpdateMode = 1
+    };
     enMode _Mode;
 
     string _Country;
@@ -20,17 +26,15 @@ private:
 
     static clsCurrency _ConvertLineToCurrencyObject(string Line, string Separator = "#//#")
     {
-        vector<string> vCurrencyData;
+        vector <string> vCurrencyData;
         vCurrencyData = clsString::Split(Line, Separator);
 
         return clsCurrency(enMode::UpdateMode, vCurrencyData[0], vCurrencyData[1], vCurrencyData[2],
-            stod(vCurrencyData[3]));
-
+                           stod(vCurrencyData[3]));
     }
 
     static string _ConvertCurrencyObjectToLine(clsCurrency Currency, string Separator = "#//#")
     {
-
         string stCurrencyRecord = "";
         stCurrencyRecord += Currency.Country() + Separator;
         stCurrencyRecord += Currency.CurrencyCode() + Separator;
@@ -38,16 +42,15 @@ private:
         stCurrencyRecord += to_string(Currency.Rate());
 
         return stCurrencyRecord;
-
     }
 
-    static  vector <clsCurrency> _LoadCurrenciesDataFromFile()
+    static vector<clsCurrency> _LoadCurrenciesDataFromFile()
     {
 
-        vector <clsCurrency> vCurrencies;
+        vector<clsCurrency> vCurrencies;
 
         fstream MyFile;
-        MyFile.open("Currencies.txt", ios::in);//read Mode
+        MyFile.open("Currencies.txt", ios::in); // read Mode
 
         if (MyFile.is_open())
         {
@@ -63,18 +66,16 @@ private:
             }
 
             MyFile.close();
-
         }
 
         return vCurrencies;
-
     }
 
-    static void _SaveCurrencyDataToFile(vector <clsCurrency> vCurrencies)
+    static void _SaveCurrencyDataToFile(vector<clsCurrency> vCurrencies)
     {
 
         fstream MyFile;
-        MyFile.open("Currencies.txt", ios::out);//overwrite
+        MyFile.open("Currencies.txt", ios::out); // overwrite
 
         string DataLine;
 
@@ -85,29 +86,26 @@ private:
             {
                 DataLine = _ConvertCurrencyObjectToLine(C);
                 MyFile << DataLine << endl;
-
             }
             MyFile.close();
         }
     }
-    
+
     void _Update()
     {
-        vector <clsCurrency> _vCurrencies;
+        vector<clsCurrency> _vCurrencies;
         _vCurrencies = _LoadCurrenciesDataFromFile();
 
-        for (clsCurrency& C : _vCurrencies)
+        for (clsCurrency &C : _vCurrencies)
         {
             if (C.CurrencyCode() == CurrencyCode())
             {
                 C = *this;
                 break;
             }
-
         }
 
         _SaveCurrencyDataToFile(_vCurrencies);
-
     }
 
     static clsCurrency _GetEmptyCurrencyObject()
@@ -116,7 +114,6 @@ private:
     }
 
 public:
-
     clsCurrency(enMode Mode, string Country, string CurrencyCode, string CurrencyName, float Rate)
     {
         _Mode = Mode;
@@ -126,11 +123,10 @@ public:
         _Rate = Rate;
     }
 
-    static vector <clsCurrency> GetAllUSDRates()
+    static vector<clsCurrency> GetAllUSDRates()
     {
 
         return _LoadCurrenciesDataFromFile();
-
     }
 
     bool IsEmpty()
@@ -171,7 +167,7 @@ public:
 
         fstream MyFile;
 
-        MyFile.open("Currencies.txt", ios::in);//read Mode
+        MyFile.open("Currencies.txt", ios::in); // read Mode
 
         if (MyFile.is_open())
         {
@@ -187,11 +183,9 @@ public:
             }
 
             MyFile.close();
-
         }
 
         return _GetEmptyCurrencyObject();
-
     }
 
     static clsCurrency FindByCountry(string Country)
@@ -199,7 +193,7 @@ public:
         Country = clsString::UpperAllString(Country);
 
         fstream MyFile;
-        MyFile.open("Currencies.txt", ios::in);//read Mode
+        MyFile.open("Currencies.txt", ios::in); // read Mode
 
         if (MyFile.is_open())
         {
@@ -212,33 +206,22 @@ public:
                     MyFile.close();
                     return Currency;
                 }
-
             }
 
             MyFile.close();
-
         }
 
         return _GetEmptyCurrencyObject();
-
     }
 
     static bool IsCurrencyExist(string CurrencyCode)
     {
         clsCurrency C1 = clsCurrency::FindByCode(CurrencyCode);
         return (!C1.IsEmpty());
-
     }
 
-    static vector <clsCurrency> GetCurrenciesList()
+    static vector<clsCurrency> GetCurrenciesList()
     {
         return _LoadCurrenciesDataFromFile();
     }
 };
-
-
-
-
-
-
-

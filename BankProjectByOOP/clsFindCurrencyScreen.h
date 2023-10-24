@@ -42,8 +42,8 @@ public:
 		_DrawScreenHeader ( "\t Find Currency " );
 
 		cout << "\n Find By : [1] Code Or[2] Country ? ";
-		short Answer;
-		cin >> Answer;
+		short Answer = clsInputValidate::ReadShortNumberBetween(1, 2);
+		
 
 		if (Answer == 1 )
 		{

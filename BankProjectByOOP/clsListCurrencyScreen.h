@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
-#include "clsCurrncy.h"
+#include "clsCurrency.h"
 #include "clsScreen.h"
 
 using namespace std;

@@ -58,7 +58,7 @@ Dominica#//#XCD#//#E.C. Dollar#//#2.700000
 Dominican Republic#//#DOP#//#Dominican Peso#//#54.716000
 East Timor#//#USD#//#US Dollar#//#1.000000
 Ecuador#//#USD#//#US Dollar#//#1.000000
-Egypt#//#EGP#//#Egyptian Pound#//#24.591999
+Egypt#//#EGP#//#Egyptian Pound#//#35.080002
 El Salvador#//#USD#//#US Dollar#//#1.000000
 Equatorial Guinea#//#XAF#//#CFA Franc#//#615.401978
 Eritrea#//#ERN#//#Eritrea Nakfa#//#15.000000
@@ -99,7 +99,7 @@ Israel#//#ILS#//#Israel Shekel#//#3.389000
 Italy#//#EUR#//#Euro#//#0.938000
 Jamaica#//#JMD#//#Jamaican Dollar#//#153.470001
 Japan#//#JPY#//#Japanese Yen#//#134.869995
-Jordan#//#JOD#//#Jordanian Dinar#//#0.710000
+Jordan#//#JOD#//#Jordanian Dinar#//#0.708000
 Kazakhstan#//#KZT#//#Kazakhstan Tenge#//#468.950012
 Kenya#//#KES#//#Kenyan Shilling#//#122.739998
 Kiribati#//#AUD#//#Australian Dollar#//#1.451000
